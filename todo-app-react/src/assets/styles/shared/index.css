@@ -1,0 +1,100 @@
+/* ----------------------------
+   ⚙️ CSS Reset + Defaults
+---------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ----------------------------
+   🎨 Theme Variables
+---------------------------- */
+
+/* 🌞 Light Theme (Glassmorphic Look) */
+:root {
+  --bg-color: #e9ecf1; /* soft neutral for background */
+  --text-color: #1a1a1a;
+  --card-bg: rgba(255, 255, 255, 0.55); /* translucent white */
+  --border-color: rgba(255, 255, 255, 0.3); /* subtle border */
+  --primary-color: #0d6efd;
+  --danger-color: #dc3545;
+  --radius: 16px;
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.1); /* soft blur shadow */
+  --blur: blur(12px); /* apply for backdrop-filter */
+}
+
+/* 🌙 Dark Theme Override */
+[data-theme='dark'] {
+  --bg-color: #1e1e1e;
+  --text-color: #f1f1f1;
+  --card-bg: #2a2a2a;
+  --border-color: #444;
+  --primary-color: #4f9cff;
+  --danger-color: #ff6b6b;
+  --shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* ----------------------------
+   🧱 Layout Wrapper
+---------------------------- */
+.app {
+  max-width: 720px;
+  margin: auto;
+  padding: 2rem 1.5rem;
+}
+
+/* ----------------------------
+   🧠 Typography
+---------------------------- */
+h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: var(--primary-color);
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 1.6rem;
+  }
+}
+
+/* ----------------------------
+   🧩 Shared Elements
+---------------------------- */
+button {
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+input, select {
+  font-family: inherit;
+  border-radius: var(--radius);
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.2);
+}
+
+small {
+  font-size: 0.85rem;
+}
