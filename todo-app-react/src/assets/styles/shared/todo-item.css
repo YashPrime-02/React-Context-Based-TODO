@@ -96,6 +96,18 @@ button.delete:hover {
   border-radius: 50%;
   padding: 0.2rem 0.4rem;
 }
+
+
+.actions svg {
+  stroke: var(--text-color);
+  transition: transform 0.2s ease, stroke 0.3s ease;
+}
+
+.actions button:hover svg {
+  transform: scale(1.15);
+  stroke: var(--primary-color);
+}
+
 /* ----------------------------
    📱 Responsive Todo Item
 ---------------------------- */

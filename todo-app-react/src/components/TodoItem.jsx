@@ -2,21 +2,21 @@ import React, { useContext, useState } from 'react';
 import { TodoContext } from '../context/TodoContext';
 import '../assets/styles/shared/todo-item.css';
 
+// ✅ Import Lucide icons
+import { Edit3, Save, Trash2, X } from 'lucide-react';
+
 const TodoItem = ({ todo }) => {
   const { toggleComplete, deleteTodo, updateTodo } = useContext(TodoContext);
 
-  // Edit mode state
   const [isEditing, setIsEditing] = useState(false);
   const [editedText, setEditedText] = useState(todo.text);
   const [editedPriority, setEditedPriority] = useState(todo.priority);
 
-  // Format due date
   const formatDate = (isoDate) => {
     if (!isoDate) return 'No due date';
     return new Date(isoDate).toLocaleDateString();
   };
 
-  // Save the edited changes
   const handleSave = () => {
     if (editedText.trim()) {
       updateTodo(todo.id, {
@@ -70,13 +70,21 @@ const TodoItem = ({ todo }) => {
       <div className="actions">
         {isEditing ? (
           <>
-            <button onClick={handleSave} className="save-btn">💾</button>
-            <button onClick={() => setIsEditing(false)} className="cancel-btn">✖</button>
+            <button onClick={handleSave} className="save-btn" title="Save">
+              <Save size={18} />
+            </button>
+            <button onClick={() => setIsEditing(false)} className="cancel-btn" title="Cancel">
+              <X size={18} />
+            </button>
           </>
         ) : (
           <>
-            <button onClick={() => setIsEditing(true)} className="edit-btn">✏️</button>
-            <button onClick={() => deleteTodo(todo.id)} className="delete">🗑️</button>
+            <button onClick={() => setIsEditing(true)} className="edit-btn" title="Edit">
+              <Edit3 size={18} />
+            </button>
+            <button onClick={() => deleteTodo(todo.id)} className="delete" title="Delete">
+              <Trash2 size={18} />
+            </button>
           </>
         )}
       </div>
