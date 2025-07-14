@@ -2,50 +2,156 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: white;
-  border: 1px solid #ddd;
-  padding: 0.75rem;
-  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border-color);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
   margin-bottom: 1rem;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow);
+  color: var(--text-color);
 }
 
+/* Strike-through and faded effect when completed */
 .todo-item.completed {
   opacity: 0.6;
   text-decoration: line-through;
 }
 
+/* Left content (checkbox + text) */
 .todo-item .left {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  flex: 1;
 }
 
+/* Todo title */
 .text-details .text {
   font-weight: 600;
+  font-size: 1rem;
 }
 
+/* Due date and priority info */
 .text-details .meta {
   font-size: 0.85rem;
-  color: #666;
+  color: var(--text-color);
+  opacity: 0.8;
+}
+
+/* Priority colors (can be shown as badges) */
+.priority {
+  font-weight: bold;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
 }
 
 .priority.low {
+  background-color: rgba(52, 152, 219, 0.2);
   color: #3498db;
 }
 
 .priority.medium {
+  background-color: rgba(241, 196, 15, 0.2);
   color: #f1c40f;
 }
 
 .priority.high {
+  background-color: rgba(231, 76, 60, 0.2);
   color: #e74c3c;
 }
 
-button.delete {
+/* Action buttons (edit, delete, save, cancel) */
+.todo-item .actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.todo-item button {
   background: transparent;
-  color: #e74c3c;
-  font-size: 1.2rem;
   border: none;
+  font-size: 1.1rem;
   cursor: pointer;
+  color: var(--text-color);
+  transition: transform 0.2s ease;
+}
+
+.todo-item button:hover {
+  transform: scale(1.1);
+}
+
+/* Delete button red */
+button.delete {
+  color: var(--danger-color);
+}
+
+button.delete:hover {
+  color: #fff;
+  background-color: var(--danger-color);
+  border-radius: 50%;
+  padding: 0.2rem 0.4rem;
+}
+/* ----------------------------
+   📱 Responsive Todo Item
+---------------------------- */
+
+@media (max-width: 768px) {
+  .todo-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+
+  .todo-item .left {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .text-details .text {
+    font-size: 0.95rem;
+  }
+
+  .text-details .meta {
+    font-size: 0.8rem;
+  }
+
+  .priority {
+    font-size: 0.75rem;
+  }
+
+  .todo-item .actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 480px) {
+  .todo-item {
+    padding: 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .text-details .text {
+    font-size: 0.9rem;
+  }
+
+  .priority {
+    padding: 0.1rem 0.4rem;
+  }
+
+  .todo-item .actions {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .todo-item button {
+    font-size: 1rem;
+  }
 }

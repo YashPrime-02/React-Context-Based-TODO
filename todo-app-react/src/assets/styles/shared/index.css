@@ -81,20 +81,91 @@ h1 {
 button {
   font-family: inherit;
   cursor: pointer;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.25);
+  color: var(--text-color);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid var(--border-color);
   transition: all 0.3s ease;
 }
 
-input, select {
-  font-family: inherit;
-  border-radius: var(--radius);
+/* Hover state for all buttons */
+button:hover {
+  background: rgba(255, 255, 255, 0.35);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
-input:focus, select:focus, textarea:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.2);
+/* Active/click state */
+button:active {
+  transform: scale(0.97);
+  box-shadow: none;
+}
+/* ----------------------------
+   📱 Responsive Media Queries
+---------------------------- */
+
+/* Medium Screens (Tablets) */
+@media (max-width: 900px) {
+  .app {
+    padding: 1.5rem 1rem;
+  }
+
+  button {
+    padding: 0.45rem 0.9rem;
+    font-size: 0.9rem;
+  }
+
+  h1 {
+    font-size: 1.9rem;
+  }
 }
 
-small {
-  font-size: 0.85rem;
+/* Small Screens (Mobiles) */
+@media (max-width: 600px) {
+  .app {
+    padding: 1rem 0.75rem;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+
+  button {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.75rem;
+  }
+
+  .todo-form input,
+  .todo-form select,
+  .todo-form button {
+    font-size: 0.9rem;
+  }
+
+  .todo-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .todo-item .left {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .todo-filters {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .filter-group {
+    flex-wrap: wrap;
+  }
 }

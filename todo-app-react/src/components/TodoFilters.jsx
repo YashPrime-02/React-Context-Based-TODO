@@ -1,18 +1,18 @@
 import React, { useContext } from 'react';
 import { TodoContext } from '../context/TodoContext';
-import '../assets/styles/shared/todo-filters.css'; // CSS for filter buttons
+import '../assets/styles/shared/todo-filters.css'; // Filter styles
 
 const TodoFilters = () => {
-  const { filters, setFilter } = useContext(TodoContext);
+  const { filters, setFilter, clearCompleted } = useContext(TodoContext);
 
-  // Filter button handler
+  // Handler to change status or priority filters
   const handleFilterChange = (type, value) => {
     setFilter({ [type]: value });
   };
 
   return (
-    <div className="todo-filters">
-      {/* Status Filters */}
+    <div className="todo-filters glass-card">
+      {/* 🔘 Status Filters */}
       <div className="filter-group">
         <label>Status:</label>
         <button
@@ -35,7 +35,7 @@ const TodoFilters = () => {
         </button>
       </div>
 
-      {/* Priority Filters */}
+      {/* 🟣 Priority Filters */}
       <div className="filter-group">
         <label>Priority:</label>
         <button
@@ -61,6 +61,13 @@ const TodoFilters = () => {
           onClick={() => handleFilterChange('priority', 'low')}
         >
           Low 🔵
+        </button>
+      </div>
+
+      {/* 🧹 Clear Completed Todos */}
+      <div className="filter-group">
+        <button className="clear-completed" onClick={clearCompleted}>
+          🧹 Clear Completed
         </button>
       </div>
     </div>

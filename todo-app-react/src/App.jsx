@@ -1,29 +1,34 @@
 import React from 'react';
-// Import global context provider (Todo state management)
+// Global Context Providers
 import { TodoProvider } from './context/TodoContext';
-// Global CSS styles (layout, reset, fonts, etc.)
+import ThemeToggle from './components/ThemeToggle';
+
+// CSS (moved to shared folder)
 import './assets/styles/shared/index.css';
 
-// Component imports
+// Components
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
-import TodoFilters from './components/TodoFilters'; // ✅ Now active
+import TodoFilters from './components/TodoFilters';
 
 function App() {
   return (
-    // Wrap the entire app with TodoProvider to share global todo state
+    // Share global state via context (todos + filters)
     <TodoProvider>
       <div className="app">
-        {/* Page Title */}
+        {/* 🌗 Theme toggle button (top-right) */}
+        <ThemeToggle />
+
+        {/* App Title */}
         <h1>📝 Todo App (React + Context API)</h1>
 
-        {/* ✅ Form to add new todos */}
+        {/* ✅ Add new todo form */}
         <TodoForm />
 
-        {/* ✅ Filters for status and priority */}
+        {/* ✅ Filter by status and priority */}
         <TodoFilters />
 
-        {/* ✅ Todo list (shows filtered todos) */}
+        {/* ✅ Render todo list */}
         <TodoList />
       </div>
     </TodoProvider>

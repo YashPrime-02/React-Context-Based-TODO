@@ -5,19 +5,19 @@ import { v4 as uuidv4 } from 'uuid';
 // Create the TodoContext
 export const TodoContext = createContext();
 
-// This component wraps the entire app and provides state
+// Context provider component for global todo state
 export const TodoProvider = ({ children }) => {
   // Todos stored in localStorage
   const [todos, setTodos] = useLocalStorage('todos', []);
 
-  // Filter state: 'all', 'completed', 'active'
+  // Filters stored in localStorage
   const [filters, setFilters] = useLocalStorage('filters', {
-    status: 'all',       // Filter by status
-    priority: 'all',     // Filter by priority
-    due: ''              // Filter by due date
+    status: 'all',       // 'all', 'completed', 'active'
+    priority: 'all',     // 'all', 'high', 'medium', 'low'
+    due: ''              // optional due date filter
   });
 
-  // Add new todo
+  // ✅ Add new todo
   const addTodo = useCallback((text, due, priority) => {
     const newTodo = {
       id: uuidv4(),
@@ -30,7 +30,7 @@ export const TodoProvider = ({ children }) => {
     setTodos(prev => [...prev, newTodo]);
   }, [setTodos]);
 
-  // Update fields in a specific todo
+  // ✅ Update specific fields of a todo (used for edit)
   const updateTodo = useCallback((id, updatedFields) => {
     setTodos(prev =>
       prev.map(todo =>
@@ -39,12 +39,12 @@ export const TodoProvider = ({ children }) => {
     );
   }, [setTodos]);
 
-  // Delete a todo by id
+  // ✅ Delete todo by ID
   const deleteTodo = useCallback((id) => {
     setTodos(prev => prev.filter(todo => todo.id !== id));
   }, [setTodos]);
 
-  // Toggle completed state
+  // ✅ Toggle completion state
   const toggleComplete = useCallback((id) => {
     setTodos(prev =>
       prev.map(todo =>
@@ -53,7 +53,12 @@ export const TodoProvider = ({ children }) => {
     );
   }, [setTodos]);
 
-  // Reorder list (for drag & drop)
+  // ✅ Clear all completed todos
+  const clearCompleted = useCallback(() => {
+    setTodos(prev => prev.filter(todo => !todo.completed));
+  }, [setTodos]);
+
+  // ✅ Reorder todos (used for drag-and-drop)
   const reorderTodos = useCallback((startIdx, endIdx) => {
     setTodos(prev => {
       const updated = [...prev];
@@ -63,12 +68,12 @@ export const TodoProvider = ({ children }) => {
     });
   }, [setTodos]);
 
-  // Update filters
+  // ✅ Set filters
   const setFilter = useCallback((newFilter) => {
     setFilters(prev => ({ ...prev, ...newFilter }));
-  }, []);
+  }, [setFilters]);
 
-  // Only update context value when dependencies change
+  // ✅ Memoize all exposed values to avoid unnecessary rerenders
   const value = useMemo(() => ({
     todos,
     filters,
@@ -76,9 +81,10 @@ export const TodoProvider = ({ children }) => {
     updateTodo,
     deleteTodo,
     toggleComplete,
+    clearCompleted,
     reorderTodos,
     setFilter
-  }), [todos, filters]);
+  }), [todos, filters, addTodo, updateTodo, deleteTodo, toggleComplete, clearCompleted, reorderTodos, setFilter]);
 
   return (
     <TodoContext.Provider value={value}>

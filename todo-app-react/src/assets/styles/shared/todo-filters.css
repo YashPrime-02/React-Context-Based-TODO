@@ -4,34 +4,94 @@
   margin-bottom: 1.5rem;
   flex-wrap: wrap;
   gap: 1rem;
+  padding: 1rem;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: var(--shadow);
 }
 
+/* Each group: Status / Priority / Clear Completed */
 .filter-group {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .filter-group label {
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-color);
 }
 
+/* Buttons inside filter groups */
 .filter-group button {
   padding: 0.4rem 0.8rem;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  background-color: #f3f3f3;
-  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background-color: rgba(255, 255, 255, 0.25);
+  color: var(--text-color);
   font-size: 0.9rem;
-  transition: background-color 0.2s ease;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
 }
 
 .filter-group button:hover {
-  background-color: #e2e2e2;
+  background-color: rgba(255, 255, 255, 0.4);
 }
 
+/* Active filter state */
 .filter-group button.active {
-  background-color: #007bff;
+  background-color: var(--primary-color);
   color: white;
-  border-color: #007bff;
+  border-color: var(--primary-color);
+  font-weight: 500;
+}
+
+/* Optional clear-completed button style */
+.clear-completed {
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid var(--danger-color);
+  color: var(--danger-color);
+  background-color: rgba(255, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+
+.clear-completed:hover {
+  background-color: rgba(255, 0, 0, 0.15);
+  color: white;
+  background: var(--danger-color);
+}
+/* ----------------------------
+   📱 Responsive Filters (Mobile + Tablet)
+---------------------------- */
+
+@media (max-width: 768px) {
+  .todo-filters {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .filter-group {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 0.75rem;
+  }
+
+  .filter-group label {
+    min-width: 60px;
+    font-size: 0.9rem;
+  }
+
+  .filter-group button,
+  .clear-completed {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.75rem;
+  }
 }
